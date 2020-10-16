@@ -3,7 +3,7 @@ const app = express();
 const port = process.env.PORT || 8900;
 const mongo = require('mongodb');
 const MongoClient = mongo.MongoClient;
-const mongoUrl = "mongodb+srv://sagarika:mongo@123@cluster0-f8vmc.mongodb.net/edureka?retryWrites=true&w=majority";
+const mongoUrl = "mongodb+srv://sagarika:mongo@123@cluster0.nxu8i.mongodb.net/edureka?retryWrites=true&w=majority";
 const cors = require('cors');
 const bodyParser = require('body-parser');
 let db;
