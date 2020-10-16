@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
-const port = 8900;
+const port = process.env.PORT || 8900;
 const mongo = require('mongodb');
 const MongoClient = mongo.MongoClient;
-const mongoUrl = "mongodb://localhost:27017";
+const mongoUrl = "mongodb+srv://admin:mongo@123@cluster0-f8vmc.mongodb.net/edurekinternship?retryWrites=true&w=majority";
 const cors = require('cors');
 const bodyParser = require('body-parser');
 let db;
@@ -52,7 +52,7 @@ app.get('/restaurant',(req,res) => {
     else if(req.query.mealtype){
         query={"type.mealtype":req.query.mealtype}
     }
-    db.collection('restaurant').find(query).toArray((err,result) =>{
+    db.collection('restaurent').find(query).toArray((err,result) =>{
         if(err) throw err;
         res.send(result)
     })
@@ -61,7 +61,7 @@ app.get('/restaurant',(req,res) => {
 app.get('/restaurantDetails/:id',(req,res) => {
     console.log(req.params.id)
     var query = {_id:req.params.id}
-    db.collection('restaurant').find(query).toArray((err,result) =>{
+    db.collection('restaurent').find(query).toArray((err,result) =>{
         if(err) throw err;
         res.send(result)
     })
@@ -87,7 +87,7 @@ app.get('/restaurantlist/:mealtype', (req,res) => {
     }else if(req.query.lcost && req.query.hcost){
         query={"type.mealtype":req.params.mealtype,"cost":{$lt:parseInt(req.query.lcost),$gt:parseInt(req.query.hcost)} }
     }
-    db.collection('restaurant').find(query).sort(sort).toArray((err,result) =>{
+    db.collection('restaurent').find(query).sort(sort).toArray((err,result) =>{
         if(err) throw err;
         res.send(result)
     })
@@ -115,7 +115,7 @@ app.post('/placeorder',(req,res) => {
 
 MongoClient.connect(mongoUrl,(err,client) => {
     if(err) console.log(err);
-    db = client.db('edurekainternship');
+    db = client.db('edurekinternship');
     app.listen(port,(err) => {
         if(err) throw err;
         console.log(`Server is running on port ${port}`)
